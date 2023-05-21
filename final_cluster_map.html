@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <style>
+         #ced-map {
+            height: 500px;
+         }
+         .ced-infowindow-content b {
+            display: block;
+         }
+      </style>
+   </head>
+   <body>
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initialize&&v=weekly" defer></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+
+      <button type="button" id="refreshmap">Clear Map</button>
+      <div id="ced-map"></div>
+
+      <script>
+
+      var gm_map;
+      var markerArray = [];
+      var clusterMarkers = [];
+
+      function mapLatLngData(){
+            const contentString =
+                  '<div calss="ced-infowindow"><div class="ced-infowindow-img"><img src="https://polytechme.com/wp-content/uploads/2023/02/6.png" alt="6"></div><div class="ced-infowindow-title"><h3>Ligna Decor</h3></div><div class="ced-infowindow-content"><span>Our solutions</span><b>Veneer peeling</b><b>Veneer drying</b><b>Veneer analyzers</b></div></div>';
+
+            const icon = "https://polytechme.com/wp-content/uploads/2023/02/cluster_marker.png";
+
+            clusterMarkers = [
+                    new google.maps.Marker({
+                      position: new google.maps.LatLng(41.00253, 29.17062),
+                      map: gm_map,
+                      title: 'Map title-1',
+                      markerContent: contentString,
+                      icon: icon,
+                    }),
+
+                    new google.maps.Marker({
+                      position: new google.maps.LatLng(41.00249, 29.17061),
+                      map: gm_map,
+                      title: "P1220214 2.JPG",
+                      markerContent:'content -2 ',
+                      icon: icon,
+                    }),
+
+                    new google.maps.Marker({
+                      position: new google.maps.LatLng(51.00249, 39.17061),
+                      map: gm_map,
+                      title: "P1220214 33.JPG",
+                      markerContent:'content -2 ',
+                      icon: icon,
+                    }),
+
+                    new google.maps.Marker({
+                      position: new google.maps.LatLng(52.00249, 40.17061),
+                      map: gm_map,
+                      title: "P1220214 33.JPG",
+                      markerContent:'content -2 ',
+                      icon: icon,
+                    })
+                ];
+
+            return clusterMarkers;
+         }
+
+
+         function initialize(searchMarkers = []){
+            var marker, i;
+
+            if(searchMarkers.length == 0) {
+              mapLatLngData();
+            }else{
+              clusterMarkers = searchMarkers;
+            }
+            
+            var ced_googlemaps = {
+                zoom: 3,
+                center: new google.maps.LatLng(41.00253, 29.17062),
+
+                styles: [
+                      {
+                          "featureType": "water",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "color": "#d3d3d3"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "transit",
+                          "stylers": [
+                              {
+                                  "color": "#808080"
+                              },
+                              {
+                                  "visibility": "off"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.highway",
+                          "elementType": "geometry.stroke",
+                          "stylers": [
+                              {
+                                  "visibility": "on"
+                              },
+                              {
+                                  "color": "#b3b3b3"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.highway",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "color": "#ffffff"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.local",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "visibility": "on"
+                              },
+                              {
+                                  "color": "#ffffff"
+                              },
+                              {
+                                  "weight": 1.8
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.local",
+                          "elementType": "geometry.stroke",
+                          "stylers": [
+                              {
+                                  "color": "#d7d7d7"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "poi",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "visibility": "on"
+                              },
+                              {
+                                  "color": "#ebebeb"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "administrative",
+                          "elementType": "geometry",
+                          "stylers": [
+                              {
+                                  "color": "#a7a7a7"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.arterial",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "color": "#ffffff"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.arterial",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "color": "#ffffff"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "landscape",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "visibility": "on"
+                              },
+                              {
+                                  "color": "#efefef"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                              {
+                                  "color": "#696969"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "administrative",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                              {
+                                  "visibility": "on"
+                              },
+                              {
+                                  "color": "#737373"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "poi",
+                          "elementType": "labels.icon",
+                          "stylers": [
+                              {
+                                  "visibility": "off"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "poi",
+                          "elementType": "labels",
+                          "stylers": [
+                              {
+                                  "visibility": "off"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road.arterial",
+                          "elementType": "geometry.stroke",
+                          "stylers": [
+                              {
+                                  "color": "#d6d6d6"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "road",
+                          "elementType": "labels.icon",
+                          "stylers": [
+                              {
+                                  "visibility": "off"
+                              }
+                          ]
+                      },
+                      {
+                          "featureType": "poi",
+                          "elementType": "geometry.fill",
+                          "stylers": [
+                              {
+                                  "color": "#dadada"
+                              }
+                          ]
+                      }
+                  ],
+            }
+
+              gm_map = new google.maps.Map(document.getElementById('ced-map'), ced_googlemaps);
+
+              var mcOptions = { gridSize: 50, maxZoom: 15, styles: [{
+                  url: "https://polytechme.com/wp-content/uploads/2023/02/cluster_marker.png",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "0 0",
+                  width: 66,
+                  height: 66,
+                  anchorIcon: [44, 25],
+                  textSize: 20,
+                  textColor: "#fff",
+                  textDecoration: "none",
+                  fontStyle: "normal",
+                  fontFamily: "Arial,sans-serif"
+                }],
+
+                calculator: function(markers, numStyles) {
+                  for (var i = 0; i < markers.length; i++) {
+                    if (markers[i].getIcon().indexOf("cluster_marker.png") > -1) {
+                      return {text: markers.length, index: 1};
+                    }
+                  }
+                  return {text: markers.length, index: 0};
+                }
+              };
+
+              var markerCluster = new MarkerClusterer(gm_map, clusterMarkers, mcOptions);
+              
+              markerCluster.setCalculator(function(markers, numStyles){
+                  var index = 0,
+                  count = markers.length,
+                  total = count;
+                  
+                  while (total !== 0) {
+                      total = parseInt(total / 5, 10);
+                      index++;
+                  }
+
+                  index = Math.min(index, numStyles);
+                  samePin = _getPinStatus(markers);
+                  if (samePin) {
+                      return {
+                          text: count + " ("+ count + " Jobs)",
+                          index: index
+                      };
+                  } else {
+                      return {
+                          text: count,
+                          index: index
+                      };
+                  }               
+              });
+            
+              google.maps.event.addListener(markerCluster, 'clusterclick', function(cluster) {
+
+                  var infoWindow = new google.maps.InfoWindow({
+                      content: "",
+                      disableAutoPan: false,
+                    });
+                
+                  var markers = cluster.getMarkers();
+                  var samePin = false;
+                  samePin = _getPinStatus(markers);
+
+                  if (!samePin ){
+                      gm_map.setCenter(cluster.center_);
+                      // gm_map.setZoom(gm_map.getZoom() + 2);
+                  } else {                    
+                      var array = [];                     
+                      for (i = 0; i < markers.length; i++) {
+                          array.push(markers[i].getTitle() + '<br>');
+                      }
+
+                      if (gm_map.getZoom() <= markerCluster.getMaxZoom()) {
+                        infoWindow.setContent(markers.length + " markers<br>" + array);
+                        infoWindow.setPosition(cluster.getCenter());
+                        infoWindow.open(gm_map);
+                      }
+                  }
+              });
+              
+              for (i = 0; i < clusterMarkers.length; i++) {
+                  var marker = clusterMarkers[i];
+           
+                  google.maps.event.addListener(marker, 'click', (function(marker) {
+
+                      var infoWindow = new google.maps.InfoWindow({
+                        content: "",
+                        disableAutoPan: false,
+                      });
+
+                      return function() {
+                          infoWindow.setContent(this.markerContent);
+                          infoWindow.open(gm_map, this);
+                      }
+                  })(marker));
+              }
+           }
+         
+           $(document).ready(function() {
+              $('#refreshmap').click(function() {
+                searchMarkers = mapLatLngData();
+                initialize(searchMarkers);
+              });
+           });
+         
+          function _getPinStatus(markers) {
+            for (i = 0; i < markers.length; i++) {
+                var parentLatitude = markers[0].getPosition().lat();
+                var parentLongitude = markers[0].getPosition().lng();
+                
+                if(markers[i].getPosition().lat() == parentLatitude && 
+                  markers[0].getPosition().lng() == parentLongitude) {                        
+                  samePin = true;
+                }else{
+                  samePin = false;
+                  break;
+                }
+            }
+            return samePin;
+          }    
+      </script>    
+   </body>
+</html>
