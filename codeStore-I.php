@@ -30,7 +30,8 @@
 27.WTI Like Post --> Post Like
 28.Gravity Forms --> Add On(Views-> member active,  User Registration Add-On-> create user);
 29.CM Tooltip Glossary Pro+ --> Set grossery dictionary
-30.WP Mega Menu --> Create stylish menu 
+30.WP Mega Menu --> Create stylish menu
+31.Nextend Social Login
 
 
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
